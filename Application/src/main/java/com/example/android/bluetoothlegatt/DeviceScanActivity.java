@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,6 +43,9 @@ import java.util.ArrayList;
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
 public class DeviceScanActivity extends ListActivity {
+
+    private static final String TAG = DeviceScanActivity.class.getSimpleName();
+
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private BluetoothAdapter mBluetoothAdapter;
     private boolean mScanning;
@@ -192,6 +196,19 @@ public class DeviceScanActivity extends ListActivity {
 
         public void addDevice(BluetoothDevice device) {
             if(!mLeDevices.contains(device)) {
+                switch (device.getBondState()) {
+
+                    case BluetoothDevice.BOND_BONDED:
+                        Log.v(TAG, "scan BluetoothDevice BOND_BONDED");
+                        break;
+                    case BluetoothDevice.BOND_BONDING:
+                        Log.v(TAG, "scan BluetoothDevice BOND_BONDING");
+                        break;
+                    case BluetoothDevice.BOND_NONE:
+                        Log.v(TAG, "scan BluetoothDevice BOND_NONE");
+                        break;
+
+                }
                 mLeDevices.add(device);
             }
         }
@@ -254,6 +271,8 @@ public class DeviceScanActivity extends ListActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    //the device from callback contains bondState
+                    //and I logged them inside the addDevice() method below
                     mLeDeviceListAdapter.addDevice(device);
                     mLeDeviceListAdapter.notifyDataSetChanged();
                 }

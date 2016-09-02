@@ -136,7 +136,8 @@ public class DeviceControlActivity extends Activity {
                             }
                             mBluetoothLeService.readCharacteristic(characteristic);
                         }
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0 ||
+                                (charaProp | BluetoothGattCharacteristic.PROPERTY_INDICATE) > 0) {
                             mNotifyCharacteristic = characteristic;
                             mBluetoothLeService.setCharacteristicNotification(
                                     characteristic, true);

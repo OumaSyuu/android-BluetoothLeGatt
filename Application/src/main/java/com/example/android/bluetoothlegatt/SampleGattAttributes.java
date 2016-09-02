@@ -23,7 +23,8 @@ import java.util.HashMap;
  */
 public class SampleGattAttributes {
     private static HashMap<String, String> attributes = new HashMap();
-    public static String HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
+//    public static String CUSTOM_NOTIFY_CHARACTERISTIC = "00002a37-0000-1000-8000-00805f9b34fb";
+    public static String CUSTOM_NOTIFY_CHARACTERISTIC = "48eb9003-f352-5fa0-9b06-8fcaa22602cf";
     public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
 
     static {
@@ -31,7 +32,7 @@ public class SampleGattAttributes {
         attributes.put("0000180d-0000-1000-8000-00805f9b34fb", "Heart Rate Service");
         attributes.put("0000180a-0000-1000-8000-00805f9b34fb", "Device Information Service");
         // Sample Characteristics.
-        attributes.put(HEART_RATE_MEASUREMENT, "Heart Rate Measurement");
+        attributes.put(CUSTOM_NOTIFY_CHARACTERISTIC, "Custom Notify Characteristic");
         attributes.put("00002a29-0000-1000-8000-00805f9b34fb", "Manufacturer Name String");
     }
 
